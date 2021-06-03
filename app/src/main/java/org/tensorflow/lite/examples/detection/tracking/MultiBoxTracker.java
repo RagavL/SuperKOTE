@@ -171,9 +171,16 @@ public class MultiBoxTracker  {
       //System.out.println("It is Here");
 
     //}
-    CheckBox ch1 =(CheckBox) activity.findViewById(R.id.checkBox10);
-    CheckBox ch2 = (CheckBox)activity.findViewById(R.id.crop_info);
-    CheckBox ch3 = (CheckBox) activity.findViewById(R.id.frame_info);
+    CheckBox ch1 =(CheckBox) activity.findViewById(R.id.checkBox1);
+    CheckBox ch2 = (CheckBox)activity.findViewById(R.id.checkBox2);
+    CheckBox ch3 = (CheckBox) activity.findViewById(R.id.checkBox3);
+    CheckBox ch4 = (CheckBox) activity.findViewById(R.id.checkBox4);
+    CheckBox ch5 = (CheckBox) activity.findViewById(R.id.checkBox5);
+    CheckBox ch6 = (CheckBox) activity.findViewById(R.id.checkBox6);
+    CheckBox ch7 = (CheckBox) activity.findViewById(R.id.checkBox7);
+    CheckBox ch8 = (CheckBox) activity.findViewById(R.id.checkBox8);
+    CheckBox ch9 = (CheckBox) activity.findViewById(R.id.checkBox9);
+    CheckBox ch10 = (CheckBox) activity.findViewById(R.id.checkBox10);
     Button bu1 = (Button)activity.findViewById(R.id.button2);
     screenRects.clear();
     final Matrix rgbFrameToScreen = new Matrix(getFrameToCanvasMatrix());
@@ -186,7 +193,8 @@ public class MultiBoxTracker  {
       if(result.getTitle().equals("Lubrication System"))
       {
 
-        ch1.setChecked(true);
+        ch5.setChecked(true);
+
       }
       if(result.getTitle().equals("Recovery Box Cleaned"))
       {
@@ -197,12 +205,12 @@ public class MultiBoxTracker  {
       {
         if((results.get(0).getTitle().equals("Condensation Filter") && results.get(1).getTitle().equals("Draining")) || ((results.get(0).getTitle().equals("Draining"))&&(results.get(1).getTitle().equals("Condensation Filter")) )) {
 
-          ch3.setChecked(true);
+          ch1.setChecked(true);
         }
       }
 
 
-      if (ch1.isChecked() && ch2.isChecked() && ch3.isChecked()) {
+      if (ch1.isChecked() && ch2.isChecked() && ch5.isChecked() && ch6.isChecked() && ch7.isChecked() && ch8.isChecked() && ch9.isChecked() && ch10.isChecked()) {
         bu1.setClickable(true);
         bu1.setTextColor(Color.parseColor("#00FF00"));
 

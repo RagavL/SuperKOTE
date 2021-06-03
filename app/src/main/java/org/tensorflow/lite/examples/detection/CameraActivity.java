@@ -161,8 +161,8 @@ public abstract class CameraActivity extends AppCompatActivity
           public void onSlide(@NonNull View bottomSheet, float slideOffset) {}
         });
 
-    frameValueTextView = findViewById(R.id.frame_info);
-    cropValueTextView = findViewById(R.id.crop_info);
+    //frameValueTextView = findViewById(R.id.frame_info);
+    //cropValueTextView = findViewById(R.id.crop_info);
     inferenceTimeTextView = findViewById(R.id.inference_info);
     Calendar calendar=Calendar.getInstance();
     String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
