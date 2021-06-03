@@ -15,6 +15,7 @@ limitations under the License.
 
 package org.tensorflow.lite.examples.detection.tracking;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -24,19 +25,26 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.util.TypedValue;
+import android.widget.Button;
+import android.widget.CheckBox;
+
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+
+import org.tensorflow.lite.examples.detection.R;
 import org.tensorflow.lite.examples.detection.env.BorderedText;
 import org.tensorflow.lite.examples.detection.env.ImageUtils;
 import org.tensorflow.lite.examples.detection.env.Logger;
 import org.tensorflow.lite.examples.detection.tflite.Classifier.Recognition;
 
 /** A tracker that handles non-max suppression and matches existing objects to new detections. */
-public class MultiBoxTracker {
+public class MultiBoxTracker  {
   private static final float TEXT_SIZE_DIP = 18;
   private static final float MIN_SIZE = 16.0f;
   private static final int[] COLORS = {
@@ -67,12 +75,13 @@ public class MultiBoxTracker {
   private int frameWidth;
   private int frameHeight;
   private int sensorOrientation;
+  Activity activity;
 
-  public MultiBoxTracker(final Context context) {
+  public MultiBoxTracker(final Context context, Activity activity) {
     for (final int color : COLORS) {
       availableColors.add(color);
     }
-
+   this.activity = activity;
     boxPaint.setColor(Color.RED);
     boxPaint.setStyle(Style.STROKE);
     boxPaint.setStrokeWidth(10.0f);
@@ -154,9 +163,18 @@ public class MultiBoxTracker {
     }
   }
 
+
   private void processResults(final List<Recognition> results) {
     final List<Pair<Float, Recognition>> rectsToTrack = new LinkedList<Pair<Float, Recognition>>();
 
+    //if(results.equals("Lubrication System")) {
+      //System.out.println("It is Here");
+
+    //}
+    CheckBox ch1 =(CheckBox) activity.findViewById(R.id.checkBox10);
+    CheckBox ch2 = (CheckBox)activity.findViewById(R.id.crop_info);
+    CheckBox ch3 = (CheckBox) activity.findViewById(R.id.frame_info);
+    Button bu1 = (Button)activity.findViewById(R.id.button2);
     screenRects.clear();
     final Matrix rgbFrameToScreen = new Matrix(getFrameToCanvasMatrix());
 
@@ -164,6 +182,33 @@ public class MultiBoxTracker {
       if (result.getLocation() == null) {
         continue;
       }
+      //System.out.println("It is here"+results.get(0));
+      if(result.getTitle().equals("Lubrication System"))
+      {
+
+        ch1.setChecked(true);
+      }
+      if(result.getTitle().equals("Recovery Box Cleaned"))
+      {
+
+        ch2.setChecked(true);
+      }
+      if (results.size()>=2)
+      {
+        if((results.get(0).getTitle().equals("Condensation Filter") && results.get(1).getTitle().equals("Draining")) || ((results.get(0).getTitle().equals("Draining"))&&(results.get(1).getTitle().equals("Condensation Filter")) )) {
+
+          ch3.setChecked(true);
+        }
+      }
+
+
+      if (ch1.isChecked() && ch2.isChecked() && ch3.isChecked()) {
+        bu1.setClickable(true);
+        bu1.setTextColor(Color.parseColor("#00FF00"));
+
+      }
+
+
       final RectF detectionFrameRect = new RectF(result.getLocation());
 
       final RectF detectionScreenRect = new RectF();

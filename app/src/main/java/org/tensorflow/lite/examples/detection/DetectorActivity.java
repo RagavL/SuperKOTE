@@ -93,7 +93,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         borderedText = new BorderedText(textSizePx);
         borderedText.setTypeface(Typeface.MONOSPACE);
 
-        tracker = new MultiBoxTracker(this);
+        tracker = new MultiBoxTracker(this,DetectorActivity.this);
 
         int cropSize = TF_OD_API_INPUT_SIZE;
 

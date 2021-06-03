@@ -2,7 +2,7 @@
 <resources>
     <color name="tfe_color_primary">#4e4d52</color>
     <color name="tfe_color_primary_dark">#4e4d51</color>
-    <color name="tfe_color_accent">#42506</color>
+    <color name="tfe_color_accent">#4e4d51</color>
 
     <color name="tfe_semi_transparent">#66000000</color>
 </resources>
